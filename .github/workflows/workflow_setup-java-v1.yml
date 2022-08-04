@@ -26,11 +26,12 @@ jobs:
       with:
         java-version: ${{ matrix.java }}
     - name: Build with Gradle
-      uses: gradle/gradle-build-action@v2.2.2
       env:
         SOME_PASSWORD: ${{ secrets.MY_PASSWORD }}
         USERNAME: ${{ github.actor }}
         PASSWORD: ${{ secrets.GITHUB_TOKEN }}
+      run: gradle build
+    - uses: actions/upload-artifact@v3
       with:
-        gradle-version: 7.5
-        arguments: build
+        name: Package
+        path: build/libs
