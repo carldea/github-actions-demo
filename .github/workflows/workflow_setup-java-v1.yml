@@ -1,0 +1,36 @@
+name: Java CI with Gradle Using GitHub Action setup-java@v1
+
+on:
+  push:
+    branches: [ "main" ]
+  pull_request:
+    branches: [ "main" ]
+
+  # Allows you to run this workflow manually from the Actions tab
+  workflow_dispatch:
+
+jobs:
+  build:
+    runs-on: ${{ matrix.os }}
+    strategy:
+      matrix:
+        os: [ubuntu-latest, macOS-latest, windows-latest]
+        java: [ 17.0.3, 18, 19-ea ]
+      fail-fast: false
+      max-parallel: 4
+    name: Build and test App on JDK ${{ matrix.java }}, ${{ matrix.os }}
+    steps:
+    - uses: actions/checkout@v3
+    - name: Set up JDK ${{ matrix.java }} ${{ matrix.os }}
+      uses: actions/setup-java@v1
+      with:
+        java-version: ${{ matrix.java }}
+    - name: Build with Gradle
+      uses: gradle/gradle-build-action@v2.2.2
+      env:
+        SOME_PASSWORD: ${{ secrets.MY_PASSWORD }}
+        USERNAME: ${{ github.actor }}
+        PASSWORD: ${{ secrets.GITHUB_TOKEN }}
+      with:
+        gradle-version: 7.5
+        arguments: build
