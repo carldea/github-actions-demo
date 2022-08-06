@@ -1,0 +1,47 @@
+name: Java CI with Gradle Using GitHub Action setup-java@v1 build test release deploy
+
+on:
+  push:
+    branches: [ "main" ]
+  pull_request:
+    branches: [ "main" ]
+
+  # Allows you to run this workflow manually from the Actions tab
+  workflow_dispatch:
+
+jobs:
+  deploy:
+    runs-on: ${{ matrix.os }}
+    strategy:
+      matrix:
+        os: [ubuntu-latest]
+        java: [ 17.0.3 ]
+      fail-fast: false
+      max-parallel: 4
+    name: Build and Deploy image to DockerHub on JDK ${{ matrix.java }}, ${{ matrix.os }}
+    steps:
+      - uses: actions/checkout@v3
+      - name: Set up JDK ${{ matrix.java }} ${{ matrix.os }}
+        uses: actions/setup-java@v1
+        with:
+          java-version: ${{ matrix.java }}
+      - name: Build with Gradle
+        env:
+          SOME_PASSWORD: ${{ secrets.MY_PASSWORD }}
+          USERNAME: ${{ github.actor }}
+          PASSWORD: ${{ secrets.GITHUB_TOKEN }}
+        run: gradle build
+      - uses: actions/upload-artifact@v3
+        with:
+          name: Package
+          path: build/libs
+      - name: Log in to Docker Hub
+        uses: docker/login-action@v2
+        with:
+          username: ${{ secrets.DOCKERHUB_USERNAME }}
+          password: ${{ secrets.DOCKERHUB_PASSWORD }}
+      - name: Build and push
+        uses: docker/build-push-action@v3
+        with:
+          push: true
+          tags: carldea/demo-api:latest
