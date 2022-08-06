@@ -11,7 +11,7 @@ RUN addgroup --system javauser && \
       adduser -S -s /bin/false -G javauser javauser && \
       chown -R javauser:javauser /app
 
-COPY build/libs/demo-*-all.jar ./demo.jar
+COPY build/libs/demo-*-all.jar /app/demo.jar
 
 USER javauser
 EXPOSE 8080
