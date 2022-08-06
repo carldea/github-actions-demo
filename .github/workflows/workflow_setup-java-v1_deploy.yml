@@ -37,7 +37,6 @@ jobs:
           username: ${{ secrets.DOCKERHUB_USERNAME }}
           password: ${{ secrets.DOCKERHUB_PASSWORD }}
       - name: Build and push
-        uses: docker/build-push-action@v3
-        with:
-          push: true
-          tags: carldea/demo-api:latest
+        run: |
+        docker image build --tag carldea/demo-api:latest .
+        docker push carldea/demo-api:latest
