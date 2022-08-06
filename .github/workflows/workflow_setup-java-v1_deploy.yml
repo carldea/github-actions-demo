@@ -45,5 +45,5 @@ jobs:
           password: ${{ secrets.DOCKERHUB_PASSWORD }}
       - name: Build and push
         run: |
-        docker image build --build-arg java_image=${{ matrix.java_image }} --tag carldea/demo-api:latest .
-        docker push carldea/demo-api:latest
+          docker image build --build-arg java_image=${{ matrix.java_image }} --tag carldea/demo-api:latest .
+          docker push carldea/demo-api:latest
