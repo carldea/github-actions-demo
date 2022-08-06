@@ -1,0 +1,28 @@
+version: '3'
+
+services:
+  demoapi:
+    env_file:
+      - ./.demo_env
+    container_name: demoapi
+    restart: always
+    image: carldea/demo-api
+    volumes:
+      - ./data:/app/data
+      - ./log:/app/log
+    ports:
+      - "8080:8080"
+  watchtower:
+    container_name: watchtower
+    restart: always
+    environment:
+      - WATCHTOWER_CLEANUP=true
+    image: containrrr/watchtower
+    volumes:
+    - /var/run/docker.sock:/var/run/docker.sock
+    command: --interval 30
+volumes:
+  data:
+    driver: local
+  log:
+    driver: local

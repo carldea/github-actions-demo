@@ -1,4 +1,6 @@
-FROM azul/zulu-openjdk-alpine:17-jre-headless
+ARG java_image
+FROM azul/zulu-openjdk-alpine:${java_image}
+#FROM azul/zulu-openjdk-alpine:17-jre-headless
 ENV LANG en_US.UTF-8
 ENV LANGUAGE en_US:en
 ENV LC_ALL en_US.UTF-8
