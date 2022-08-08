@@ -15,10 +15,10 @@ jobs:
     strategy:
       matrix:
         os: [ubuntu-latest]
-        #java: [ 17.0.3 ]
-        #java_image: ['17.0.3-17.34.19-jre-headless']
-        java: [ 17.0.4 ]
-        java_image: ['17-jre-headless']
+        java: [ 17.0.3 ]
+        java_image: ['17.0.3-17.34.19-jre-headless']
+        #java: [ 17.0.4 ]
+        #java_image: ['17-jre-headless']
       fail-fast: false
       max-parallel: 4
     name: Build and Deploy image to DockerHub on JDK ${{ matrix.java }}, ${{ matrix.os }}
