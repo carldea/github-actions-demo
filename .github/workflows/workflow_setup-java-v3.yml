@@ -15,7 +15,7 @@ jobs:
     strategy:
       matrix:
         os: [ubuntu-latest]
-        java: [ 17.0.4 ]
+        java: [ 17 ]
         distro: [ 'zulu', 'temurin', 'microsoft', 'corretto', 'liberica' ]
       fail-fast: false
       max-parallel: 4
