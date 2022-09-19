@@ -27,6 +27,3 @@ jobs:
       with:
         website: jdk.java.net
         release: ${{ matrix.java-release-version }}
-        cache: gradle
-    - name: Build with Gradle
-      run: gradle build
