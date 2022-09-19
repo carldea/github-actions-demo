@@ -1,4 +1,4 @@
-name: Java CI with Gradle Using GitHub Action oracle-actions/setup-java@v3
+name: Java CI with Gradle Using GitHub Action oracle-actions/setup-java@v1
 
 on:
   push:
@@ -11,10 +11,10 @@ on:
 
 jobs:
   build:
-    runs-on: ubuntu-latest
+    runs-on: ${{ matrix.os }}
     strategy:
-      os: [ ubuntu-latest ]
       matrix:
+        os: [ ubuntu-latest ]
         java-release-version: [ '19', 'loom', 'panama', 'valhalla' ]
       fail-fast: false
       max-parallel: 4
