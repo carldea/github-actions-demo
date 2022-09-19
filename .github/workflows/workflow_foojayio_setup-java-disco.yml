@@ -1,13 +1,16 @@
 name: Build using foojayio/setup-java@disco 
 
+
 on:
   push:
-    branches: [ main ]
+    branches: [ "main" ]
   pull_request:
-    branches: [ main ]
+    branches: [ "main" ]
+
   # Allows you to run this workflow manually from the Actions tab
   workflow_dispatch:
   
+jobs:
   disco-job:
     runs-on: ubuntu-latest
     strategy:
