@@ -19,7 +19,7 @@ jobs:
         distro: [ 'zulu', 'temurin', 'microsoft', 'corretto', 'liberica' ]
       fail-fast: false
       max-parallel: 4
-    name: Build and test App on JDK ${{ matrix.java }}, ${{ matrix.os }}
+    name: Build and test App on ${{ matrix.distro }} JDK ${{ matrix.java }}, ${{ matrix.os }}
     steps:
     - uses: actions/checkout@v3
     - name: Set up ${{ matrix.distro }} JDK ${{ matrix.java }} ${{ matrix.os }}
